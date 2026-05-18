@@ -14,7 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      transcriptions: {
+        Row: {
+          created_at: string
+          duration_seconds: number | null
+          id: string
+          mode: Database["public"]["Enums"]["transcription_mode"]
+          polished_text: string | null
+          raw_text: string
+          user_id: string
+          word_count: number | null
+        }
+        Insert: {
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          mode?: Database["public"]["Enums"]["transcription_mode"]
+          polished_text?: string | null
+          raw_text: string
+          user_id: string
+          word_count?: number | null
+        }
+        Update: {
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          mode?: Database["public"]["Enums"]["transcription_mode"]
+          polished_text?: string | null
+          raw_text?: string
+          user_id?: string
+          word_count?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +79,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      transcription_mode: "default" | "email" | "message" | "note" | "code"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +206,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      transcription_mode: ["default", "email", "message", "note", "code"],
+    },
   },
 } as const
