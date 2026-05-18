@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { Mic, Square, Copy, Trash2, Sparkles, LogOut } from "lucide-react";
+import { Onboarding } from "@/components/Onboarding";
 
 export const Route = createFileRoute("/app")({ component: AppPage });
 
@@ -47,7 +48,14 @@ function AppPage() {
   const [busy, setBusy] = useState(false);
   const [history, setHistory] = useState<TxRow[]>([]);
   const [supported, setSupported] = useState(true);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const recRef = useRef<SR | null>(null);
+
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem("flow_onboarded")) setShowOnboarding(true);
+    } catch { /* ignore */ }
+  }, []);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -146,6 +154,7 @@ function AppPage() {
   return (
     <div className="min-h-screen">
       <Toaster richColors position="top-center" />
+      {showOnboarding && <Onboarding onComplete={() => setShowOnboarding(false)} />}
       <header className="border-b border-border px-6 py-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
