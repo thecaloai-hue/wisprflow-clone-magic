@@ -1,0 +1,16 @@
+{
+  "name": "Flow — Voice to Text",
+  "short_name": "Flow",
+  "description": "Speak. Flow cleans it up with AI and pastes it into any field.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f3ea",
+  "theme_color": "#f7f3ea",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
